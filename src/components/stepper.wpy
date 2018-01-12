@@ -1,0 +1,81 @@
+<template>
+  <view class="zan-stepper {{ size === 'small' ? 'zan-stepper--small' : '' }}">
+    <view
+      class="zan-stepper__minus {{ stepper <= min ? 'zan-stepper--disabled' : '' }}"
+      @tap="_handleStepperMinus({{ stepper <= min }})"
+    >-</view>
+    <input
+      class="zan-stepper__text {{ min >= max ? 'zan-stepper--disabled' : '' }}"
+      type="number"
+      value="{{ stepper }}"
+      min="{{min}}"
+      max="{{max}}"
+      disabled="{{ min >= max }}"
+      @blur="_handleStepperBlur"
+    ></input>
+    <view
+      class="zan-stepper__plus {{ stepper >= max ? 'zan-stepper--disabled' : '' }}"
+      @tap="_handleStepperPlus({{ stepper >= max }})"
+    >+</view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Stepper extends wepy.component {
+  props = {
+    componentId: String,
+    size: {
+      type: String,
+      default: ''
+    },
+    stepper: {
+      type: Number,
+      default: 0
+    },
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 0
+    }
+  }
+
+  _callback(stepper) {
+    this.$emit('stepperChange', {
+      componentId: this.componentId,
+      value: stepper
+    })
+  }
+
+  methods = {
+    _handleStepperPlus(disabled) {
+      if (disabled) { return; }
+      this._callback(this.stepper + 1)
+    },
+
+    _handleStepperMinus(disabled) {
+      if (disabled) { return; }
+      this._callback(this.stepper - 1)
+    },
+
+    _handleStepperBlur(e) {
+      let value = e.detail.value;
+      if (!value) {
+        setTimeout(() => {
+          this._callback.call(this, this.min);
+        }, 16);
+        this._callback(value);
+        return '' + value;
+      }
+
+      value = +value;
+      value = Math.max(this.min, Math.min(this.max, value));
+      this._callback(value);
+      return '' + value;
+    }
+  }
+}
+</script>

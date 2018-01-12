@@ -1,0 +1,6 @@
+.loop-cols(@index, @class) when (@index > 0) {
+  .@{class}-@{index} { width: percentage(@index / 24); }
+  .@{class}-offset-@{index} { margin-left: percentage(@index / 24); }
+
+  .loop-cols((@index - 1), @class);
+}

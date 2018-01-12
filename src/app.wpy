@@ -1,0 +1,105 @@
+<style lang="less">
+@import "./styles/components/index";
+.container {
+  background: #f9f9f9;
+  overflow: hidden;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 15px 0;
+}
+.container::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: " ";
+  width: 100%;
+  height: 1rpx;
+  background-color: #e2e2e2;
+  z-index: 5;
+}
+.doc-title {
+  position: relative;
+  padding: 15px 0;
+  margin: 10px 15px;
+  line-height: 25px;
+  font-size: 25px;
+  color: #666;
+}
+.doc-description {
+  margin: 14px 0;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666;
+}
+</style>
+
+<script>
+import wepy from "wepy";
+import "wepy-async-function";
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      "pages/card",
+      "pages/dashboard",
+      "pages/badge",
+      "pages/buttons",
+      "pages/dialog",
+      "pages/layout",
+      "pages/panel",
+      "pages/tabs",
+      "pages/popup",
+      "pages/switch",
+      "pages/stepper",
+      ],
+    window: {
+      backgroundTextStyle: "light",
+      navigationBarBackgroundColor: "#fff",
+      navigationBarTitleText: "WeChat",
+      navigationBarTextStyle: "black"
+    },
+    debug: true
+  };
+
+  globalData = {
+    userInfo: null
+  };
+
+  constructor() {
+    super();
+    this.use('promisify');
+    this.use("requestfix");
+  }
+
+  onLaunch() {
+    this.testAsync();
+  }
+
+  sleep(s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("promise resolved");
+      }, s * 1000);
+    });
+  }
+
+  async testAsync() {
+    const data = await this.sleep(3);
+    console.log(data);
+  }
+
+  getUserInfo(cb) {
+    const that = this;
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo;
+    }
+    wepy.getUserInfo({
+      success(res) {
+        that.globalData.userInfo = res.userInfo;
+        cb && cb(res.userInfo);
+      }
+    });
+  }
+}
+</script>

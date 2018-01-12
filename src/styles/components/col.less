@@ -1,0 +1,21 @@
+@import "../mixins/layout";
+
+.zan-col {
+  float: left;
+  box-sizing: border-box;
+  width: 0;
+
+  /** demo style */
+  line-height: 30px;
+  text-align: center;
+  background-color: #39a9ed;
+  font-size: 12px;
+  color: #fff;
+
+  &:nth-child(even) {
+    background-color: #66c6f2;
+  }
+}
+
+.loop-cols(24, zan-col);
+

@@ -1,0 +1,31 @@
+@import "../mixins/line";
+
+.zan-panel {
+  position: relative;
+  background: #fff;
+  margin-top: 10px;
+  overflow: hidden;
+
+  &::after {
+    .hairline;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  &-title {
+    font-size: 14px;
+    line-height: 1;
+    color: #999;
+    padding: 20px 15px 0 15px;
+  }
+
+  &--without-margin-top {
+    margin-top: 0;
+  }
+
+  &--without-border {
+    &::after {
+      border: 0 none;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+
+  <view class="container">
+
+    <view class="doc-title zan-hairline--bottom">TAB</view>
+
+    <view style="margin: 20px 0">
+      
+  <view class="zan-tab">
+    <block  wx:if="{{ $zanTab1$tab.scroll || $zanTab1$scroll }}">
+      <scroll-view class="zan-tab__bd zan-tab__bd-scroll {{ $zanTab1$fixed ? 'zan-tab__bd-fixed' : '' }}" scroll-x="true" style="height: {{ $zanTab1$tab.height || $zanTab1$height ? (($zanTab1$tab.height || $zanTab1$height) + 'px') : 'auto' }}">
+        <view wx:for="{{ $zanTab1$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab1$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab1$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </scroll-view>
+    </block>
+    <block  wx:else>
+      <view class="zan-tab__bd {{ $zanTab1$fixed ? 'zan-tab__bd-fixed' : '' }}">
+
+        <view wx:for="{{ $zanTab1$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab1$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab1$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+    </view>
+
+    <view style="margin: 20px 0">
+      
+  <view class="zan-tab">
+    <block  wx:if="{{ $zanTab2$tab.scroll || $zanTab2$scroll }}">
+      <scroll-view class="zan-tab__bd zan-tab__bd-scroll {{ $zanTab2$fixed ? 'zan-tab__bd-fixed' : '' }}" scroll-x="true" style="height: {{ $zanTab2$tab.height || $zanTab2$height ? (($zanTab2$tab.height || $zanTab2$height) + 'px') : 'auto' }}">
+        <view wx:for="{{ $zanTab2$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab2$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab2$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </scroll-view>
+    </block>
+    <block  wx:else>
+      <view class="zan-tab__bd {{ $zanTab2$fixed ? 'zan-tab__bd-fixed' : '' }}">
+
+        <view wx:for="{{ $zanTab2$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab2$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab2$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+    </view>
+
+    <view style="margin: 20px 0">
+      
+  <view class="zan-tab">
+    <block  wx:if="{{ $zanTab3$tab.scroll || $zanTab3$scroll }}">
+      <scroll-view class="zan-tab__bd zan-tab__bd-scroll {{ $zanTab3$fixed ? 'zan-tab__bd-fixed' : '' }}" scroll-x="true" style="height: {{ $zanTab3$tab.height || $zanTab3$height ? (($zanTab3$tab.height || $zanTab3$height) + 'px') : 'auto' }}">
+        <view wx:for="{{ $zanTab3$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab3$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab3$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </scroll-view>
+    </block>
+    <block  wx:else>
+      <view class="zan-tab__bd {{ $zanTab3$fixed ? 'zan-tab__bd-fixed' : '' }}">
+
+        <view wx:for="{{ $zanTab3$tab.list }}" wx:key="id" class="zan-tab__item {{ $zanTab3$tab.selectedId == item.id ? 'zan-tab__item-selected' : '' }}" bindtap="$zanTab3$_handleTabChange" data-wpy_handletabchange-a="{{item.id}}">
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+    </view>
+
+  </view>

@@ -1,0 +1,8 @@
+
+  <view class="wrap">
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+      <button class="zan-btn zan-btn-primary" bindtap="handleTap">确认付款</button>
+    </view>
+  </view>

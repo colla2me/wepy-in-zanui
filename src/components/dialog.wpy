@@ -1,0 +1,116 @@
+<template>
+  <view class="zan-dialog {{ dialog.appear ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog--mask"></view>
+    <view class="zan-dialog--container">
+      <view
+        wx:if="{{ dialog.title }}"
+        class="zan-dialog__header">{{ dialog.title }}</view>
+      <view
+        class="zan-dialog__content {{ dialog.title ? 'zan-dialog__content--title' : '' }}">{{ dialog.content }}</view>
+      <view
+        class="zan-dialog__footer {{ dialog.buttonsShowVertical ? 'zan-dialog__footer--vertical' : 'zan-dialog__footer--horizon' }}">
+        <block wx:for="{{ dialog.buttons }}" wx:key="{{ item.text }}-{{ item.type }}">
+          <button
+            class="zan-dialog__button zan-btn"
+            @tap="_onClick({{ item.type }})"
+            style="color: {{ item.color || '#333' }}">{{ item.text }}</button>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Dialog extends wepy.component {
+  data = {
+    dialog: {}
+  }
+
+  methods = {
+    _onClick(type) {
+      const { resolve, reject, showCustomBtns } = this.dialog;
+      this.dialog = { appear: false };
+      if (showCustomBtns || type === 'confirm') {
+        resolve({ type });
+      } else {
+        reject({ type });
+      }
+    },
+
+    show(options) {
+      const {
+        // 自定义 btn 列表
+        // { type: 按钮类型，回调时以此作为区分依据，text: 按钮文案, color: 按钮文字颜色 }
+        buttons = [],
+        // 标题
+        title = '',
+        // 内容
+        content = ' ',
+        // 按钮是否展示为纵向
+        buttonsShowVertical = false,
+        // 是否展示确定
+        showConfirm = true,
+        // 确认按钮文案
+        confirmText = '确定',
+        // 确认按钮颜色
+        confirmColor = '#3CC51F',
+        // 是否展示取消
+        showCancel = false,
+        // 取消按钮文案
+        cancelText = '取消',
+        // 取消按钮颜色
+        cancelColor = '#333'
+      } = options;
+
+      // 处理默认按钮的展示
+      // 纵向排布确认按钮在上方
+      let showCustomBtns = false;
+      if (buttons.length === 0) {
+        if (showConfirm) {
+          buttons.push({
+            type: 'confirm',
+            text: confirmText,
+            color: confirmColor
+          });
+        }
+
+        if (showCancel) {
+          const cancelButton = {
+            type: 'cancel',
+            text: cancelText,
+            color: cancelColor
+          };
+          if (buttonsShowVertical) {
+            buttons.push(cancelButton);
+          } else {
+            buttons.unshift(cancelButton);
+          }
+        }
+      } else {
+        showCustomBtns = true;
+      }
+
+      return new Promise((resolve, reject) => {
+        this.dialog = {
+          appear: true,
+          showCustomBtns,
+          buttons,
+          title,
+          content,
+          buttonsShowVertical,
+          showConfirm,
+          confirmText,
+          confirmColor,
+          showCancel,
+          cancelText,
+          cancelColor,
+          resolve,
+          reject
+        }
+      });
+    }
+  }
+}
+</script>
+

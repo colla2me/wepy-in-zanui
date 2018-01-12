@@ -1,0 +1,74 @@
+<style type="less">
+.logo {
+  display: block;
+  margin: 40px auto;
+  width: 92px;
+  height: 82px;
+}
+</style>
+<template>
+  <view class="container">
+
+    <image class="logo" src="https://img.yzcdn.cn/public_files/2017/02/06/ee0ebced79a80457d77ce71c7d414c74.png"></image>
+
+    <view class="zan-panel">
+      <navigator wx:for="{{ list }}" wx:key="name" class="zan-cell zan-cell--access" url="{{ item.path }}">
+        <view class="zan-cell__bd">{{ item.name }}</view>
+        <view class="zan-cell__ft"></view>
+      </navigator>
+    </view>
+
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Dashboard extends wepy.page {
+  data = {
+    list: [
+      {
+        name: 'Dialog、Toast、TopTips',
+        path: '/pages/dialog'
+      },{
+        name: 'Tabs',
+        path: '/pages/tabs'
+      },{
+        name: 'Badge',
+        path: '/pages/badge'
+      },{
+        name: 'Buttons',
+        path: '/pages/buttons'
+      },{
+        name: 'Layout',
+        path: '/pages/layout'
+      },{
+        name: 'Panel',
+        path: '/pages/panel'
+      },{
+        name: 'Popup',
+        path: '/pages/popup'
+      },{
+        name: 'Switch',
+        path: '/pages/switch'
+      },{
+        name: 'Stepper',
+        path: '/pages/stepper'
+      },{
+        name: 'Card',
+        path: '/pages/card'
+      }
+    ]
+  }
+
+  methods = {}
+
+  onLoad() {
+    wepy.getSystemInfo().then(data => {
+      if (data.SDKVersion < '1.4.0') {
+        wepy.showModal({ content: `SDKVersion最低要求1.4.0，当前版本${data.SDKVersion}`, title: '微信版本过低' })
+      }
+    })
+  }
+}
+</script>

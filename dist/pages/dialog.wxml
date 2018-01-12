@@ -1,0 +1,46 @@
+
+  <view class="container">
+    <view class="doc-title zan-hairline--bottom">DIALOG</view>
+
+    <view class="zan-btns" style="margin-top: 30vh;">
+      <button class="zan-btn" bindtap="showTopTips">
+        显示toptips
+      </button>
+      <button class="zan-btn" bindtap="showToast">
+        显示toast
+      </button>
+      <button class="zan-btn" bindtap="toggleBaseDialog">
+        基础 Dialog
+      </button>
+      <button class="zan-btn" bindtap="toggleWithoutTitleDialog">
+        Dialog - 无标题
+      </button>
+      <button class="zan-btn" bindtap="toggleButtonDialog">
+        Dialog - 自定义显示按钮
+      </button>
+      <button class="zan-btn" bindtap="toggleVerticalDialog">
+        Dialog - 按钮纵向排布
+      </button>
+    </view>
+
+    
+  <view class="zan-toast"  wx:if="{{ $toast$appear }}" bindtap="$toast$_clearToast">{{ $toast$title }}</view>
+
+    
+  <view class="zan-toptips {{ $toptips$appear ? 'zan-toptips--show' : '' }}">{{ $toptips$content }}</view>
+
+    
+  <view class="zan-dialog {{ $dialog$dialog.appear ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog--mask"/>
+    <view class="zan-dialog--container">
+      <view  wx:if="{{ $dialog$dialog.title }}" class="zan-dialog__header">{{ $dialog$dialog.title }}</view>
+      <view class="zan-dialog__content {{ $dialog$dialog.title ? 'zan-dialog__content--title' : '' }}">{{ $dialog$dialog.content }}</view>
+      <view class="zan-dialog__footer {{ $dialog$dialog.buttonsShowVertical ? 'zan-dialog__footer--vertical' : 'zan-dialog__footer--horizon' }}">
+        <block  wx:for="{{ $dialog$dialog.buttons }}" wx:key="{{ item.text }}-{{ item.type }}">
+          <button class="zan-dialog__button zan-btn" bindtap="$dialog$_onClick" style="color: {{ item.color || '#333' }}" data-wpy_onclick-a="{{ item.type }}">{{ item.text }}</button>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  </view>

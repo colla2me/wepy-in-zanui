@@ -1,0 +1,117 @@
+@import "../mixins/button";
+@zan-btn: zan-btn;
+
+.zan-btns {
+  margin: 15px;
+}
+
+.@{zan-btn} {
+  .btn();
+
+  /* type */
+  &--danger {
+    .button-color(#f44, #e33);
+    .loading-btn(@zan-btn);
+  }
+
+  &--primary {
+    .button-color(#4b0, #0a0);
+    .loading-btn(@zan-btn);
+  }
+
+  &--warn {
+    .button-color(#f85, #f85);
+    .loading-btn(@zan-btn);
+  }
+
+  /* size */
+  &--small {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+
+  &--mini {
+    display: inline-block;
+    line-height: 21px;
+    height: 22px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 10px;
+  }
+
+  &--large {
+    height: 50px;
+    line-height: 50px;
+    border-radius: 0;
+    margin-bottom: 0;
+    border: none;
+  }
+
+  /* loading */
+  &--loading {
+    color: transparent;
+    opacity: 1;
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      content: ' ';
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 3px solid #e5e5e5;
+      border-color: #666 #e5e5e5 #e5e5e5 #e5e5e5;
+      border-radius: 8px;
+      box-sizing: border-box;
+      animation: btn-spin 0.6s linear;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  /* plain */
+  &--plain {
+    &.@{zan-btn} {
+      background-color: transparent;
+    }
+
+    &.@{zan-btn}--primary {
+      color: #06BF04;
+    }
+
+    &.@{zan-btn}--warn {
+      color: #FF6600;
+    }
+
+    &.@{zan-btn}--danger {
+      color: #FF4444;
+    }
+  }
+
+  /* :last-child */
+  &:last-child {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+}
+
+/* 重写button组件的button-hover样式 */
+.button-hover {
+  opacity: 0.9;
+}
+
+@keyframes btn-spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

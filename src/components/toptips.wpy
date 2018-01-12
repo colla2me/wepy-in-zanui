@@ -1,0 +1,34 @@
+<template>
+  <view class="zan-toptips {{ appear ? 'zan-toptips--show' : '' }}">{{ content }}</view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class TopTips extends wepy.component {
+  data = {
+    appear: false,
+    content: ''
+  }
+
+  methods = {
+    show(content = '', options = {}) {
+      clearTimeout(this.timer);
+
+      if (typeof options === 'number') {
+        options = { duration: options };
+      }
+
+      options = { duration: 3000, ...options };
+
+      this.timer = setTimeout(() => {
+        this.appear = false;
+        this.timer = null;
+        this.$apply();
+      }, options.duration);
+
+      this.appear = true;
+      this.content = content;
+    }
+  }
+}
+</script>

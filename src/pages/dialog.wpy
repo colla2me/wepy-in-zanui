@@ -1,0 +1,146 @@
+<template>
+  <view class="container">
+    <view class="doc-title zan-hairline--bottom">DIALOG</view>
+
+    <view class="zan-btns" style="margin-top: 30vh;">
+      <button class="zan-btn" @tap="showTopTips">
+        显示toptips
+      </button>
+      <button class="zan-btn" @tap="showToast">
+        显示toast
+      </button>
+      <button class="zan-btn" @tap="toggleBaseDialog">
+        基础 Dialog
+      </button>
+      <button class="zan-btn" @tap="toggleWithoutTitleDialog">
+        Dialog - 无标题
+      </button>
+      <button class="zan-btn" @tap="toggleButtonDialog">
+        Dialog - 自定义显示按钮
+      </button>
+      <button class="zan-btn" @tap="toggleVerticalDialog">
+        Dialog - 按钮纵向排布
+      </button>
+    </view>
+
+    <toast />
+    <toptips />
+    <dialog />
+  </view>
+
+</template>
+
+<script>
+import wepy from "wepy";
+import Dialog from "../components/dialog";
+import Toast from "../components/toast";
+import TopTips from "../components/toptips";
+
+export default class Example extends wepy.page {
+  config = {}
+  components = {
+    dialog: Dialog,
+    toast: Toast,
+    toptips: TopTips
+  }
+  props = {
+    test: {
+      type: String,
+      default: '1213test'
+    }
+  }
+  data = {
+    show: false
+  }
+
+  events = {
+    onClickDlgBtns(type) {
+      console.log('onClickDlgBtns', type)
+    }
+  }
+
+  methods = {
+    showTopTips() {
+      this.$invoke("toptips", 'show', 'toptips的内容', 4000)
+    },
+
+    showToast() {
+      this.$invoke("toast", 'show', 'toast的内容', 2000)
+    },
+
+    toggleBaseDialog() {
+      this.$invoke("dialog", 'show', {
+        title: '弹窗',
+        content: '这是一个模态弹窗',
+        showCancel: true
+      }).then(data => {
+        console.log('ok:', data);
+      }).catch(data => {
+        console.log('cancel:', data);
+      });
+    },
+
+    toggleWithoutTitleDialog() {
+      this.$invoke("dialog", 'show', {
+        content: '这是一个模态弹窗',
+        showCancel: true
+      }).then(data => {
+        console.log('ok:', data);
+      }).catch(data => {
+        console.log('cancel:', data);
+      });
+    },
+
+    toggleButtonDialog() {
+      this.$invoke("dialog", 'show', {
+        title: '弹窗',
+        content: '这是一个模态弹窗',
+        buttons: [{
+          text: '现金支付',
+          color: 'red',
+          type: 'cash'
+        }, {
+          text: '微信支付',
+          color: '#3CC51F',
+          type: 'wechat'
+        }, {
+          text: '取消',
+          type: 'cancel'
+        }]
+      }).then(data => {
+        console.log('ok:', data);
+      }).catch(data => {
+        console.log('cancel:', data);
+      });
+    },
+
+    toggleVerticalDialog() {
+      this.$invoke("dialog", 'show', {
+        title: '弹窗',
+        content: '这是一个模态弹窗',
+        buttonsShowVertical: true,
+        buttons: [{
+          text: '现金支付',
+          color: 'red',
+          type: 'cash'
+        }, {
+          text: '微信支付',
+          color: '#3CC51F',
+          type: 'wechat'
+        }, {
+          text: '取消',
+          type: 'cancel'
+        }]
+      }).then(data => {
+        console.log('ok:', data);
+      }).catch(data => {
+        console.log('cancel:', data);
+      });
+    }
+  }
+
+  onLoad() {
+  }
+}
+</script>
+

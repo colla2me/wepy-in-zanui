@@ -1,0 +1,50 @@
+
+  <view class="container">
+
+    <view class="doc-title zan-hairline--bottom">SWITCH</view>
+
+    <view class="zan-panel-title">同步开关</view>
+    <view class="zan-panel">
+      
+  <view class="zan-switch zan-switch--{{ $switch1$checked ? 'on' : 'off' }} {{ $switch1$disabled ? 'zan-swtich--disabled' : '' }}" bindtap="$switch1$_handleSwitchChange">
+    <view class="zan-switch__circle">
+      <view hidden="{{ !$switch1$loading }}" class="zan-switch__loading"/>
+    </view>
+    <view class="zan-switch__bg"/>
+  </view>
+
+    </view>
+
+    <view class="zan-panel-title">异步开关</view>
+    <view class="zan-panel">
+      
+  <view class="zan-switch zan-switch--{{ $switch2$checked ? 'on' : 'off' }} {{ $switch2$disabled ? 'zan-swtich--disabled' : '' }}" bindtap="$switch2$_handleSwitchChange">
+    <view class="zan-switch__circle">
+      <view hidden="{{ !$switch2$loading }}" class="zan-switch__loading"/>
+    </view>
+    <view class="zan-switch__bg"/>
+  </view>
+
+    </view>
+
+    <view class="zan-panel-title">开关不可用</view>
+    <view class="zan-panel">
+      
+  <view class="zan-switch zan-switch--{{ $switch3$checked ? 'on' : 'off' }} {{ $switch3$disabled ? 'zan-swtich--disabled' : '' }}" bindtap="$switch3$_handleSwitchChange">
+    <view class="zan-switch__circle">
+      <view hidden="{{ !$switch3$loading }}" class="zan-switch__loading"/>
+    </view>
+    <view class="zan-switch__bg"/>
+  </view>
+
+      
+  <view class="zan-switch zan-switch--{{ $switch4$checked ? 'on' : 'off' }} {{ $switch4$disabled ? 'zan-swtich--disabled' : '' }}" bindtap="$switch4$_handleSwitchChange">
+    <view class="zan-switch__circle">
+      <view hidden="{{ !$switch4$loading }}" class="zan-switch__loading"/>
+    </view>
+    <view class="zan-switch__bg"/>
+  </view>
+
+    </view>
+
+  </view>

@@ -1,0 +1,47 @@
+<template>
+  <view
+    class="zan-switch zan-switch--{{ checked ? 'on' : 'off' }} {{ disabled ? 'zan-swtich--disabled' : '' }}"
+    @tap="_handleSwitchChange"
+  >
+    <view class="zan-switch__circle">
+      <view hidden="{{ !loading }}" class="zan-switch__loading"></view>
+    </view>
+    <view class="zan-switch__bg"></view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Switcher extends wepy.component {
+  props = {
+    checked: {
+      type: [Boolean, String],
+      coerce: function(v) {
+        if (v === 'false') { return false; }
+        return !!v;
+      },
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: [Boolean, String],
+      coerce: function(v) {
+        if (v === 'false') { return false; }
+        return !!v;
+      },
+      default: false
+    },
+    componentId: String
+  }
+
+  methods = {
+    _handleSwitchChange() {
+      if (this.disabled) { return; }
+      this.$emit('switchChange', {checked: !this.checked, componentId: this.componentId});
+    }
+  }
+}
+</script>

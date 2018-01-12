@@ -1,0 +1,25 @@
+
+  <view class="container">
+
+    <view class="doc-title zan-hairline--bottom">Stepper</view>
+
+    <view style="padding: 40px 15px">
+      
+  <view class="zan-stepper {{ $stepper1$size === 'small' ? 'zan-stepper--small' : '' }}">
+    <view class="zan-stepper__minus {{ $stepper1$stepper <= $stepper1$min ? 'zan-stepper--disabled' : '' }}" bindtap="$stepper1$_handleStepperMinus" data-wpy_handlestepperminus-a="{{ $stepper1$stepper <= $stepper1$min }}">-</view>
+    <input class="zan-stepper__text {{ $stepper1$min >= $stepper1$max ? 'zan-stepper--disabled' : '' }}" type="number" value="{{ $stepper1$stepper }}" disabled="{{ $stepper1$min >= $stepper1$max }}" bindblur="$stepper1$_handleStepperBlur"/>
+    <view class="zan-stepper__plus {{ $stepper1$stepper >= $stepper1$max ? 'zan-stepper--disabled' : '' }}" bindtap="$stepper1$_handleStepperPlus" data-wpy_handlestepperplus-a="{{ $stepper1$stepper >= $stepper1$max }}">+</view>
+  </view>
+
+    </view>
+
+    <!-- 当最大值等于最小值时，组件不可用 -->
+    <!-- <view style="padding: 40px 15px ">
+      <template is="zan-stepper" data="{{ ...stepper2, componentId: 'stepper2' }}" />
+    </view> -->
+
+    <!-- small size -->
+    <!-- <view style="padding: 40px 15px ">
+      <template is="zan-stepper" data="{{ ...stepper3, componentId: 'stepper3', size: 'small' }}" />
+    </view> -->
+  </view>

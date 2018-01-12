@@ -1,0 +1,32 @@
+<template>
+  <view class="zan-toast" wx:if="{{ appear }}" @tap="_clearToast">{{ title }}</view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Toast extends wepy.component {
+  data = {
+    appear: false,
+    title: ''
+  }
+
+  methods = {
+    _clearToast() {
+      clearTimeout(this.timer);
+      this.appear = false;
+      this.timer = null;
+    },
+
+    show(title = '', timeout = 3000) {
+      clearTimeout(this.timer);
+      this.appear = true;
+      this.title = title;
+      this.timer = setTimeout(() => {
+        this.methods._clearToast.call(this);
+        this.$apply();
+      }, timeout);
+    }
+  }
+}
+</script>
+

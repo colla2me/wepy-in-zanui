@@ -1,0 +1,56 @@
+<template>
+  <view class="zan-tab">
+    <block wx:if="{{ tab.scroll || scroll }}">
+      <scroll-view
+        class="zan-tab__bd zan-tab__bd--scroll {{ fixed ? 'zan-tab__bd--fixed' : '' }}"
+        scroll-x="true"
+        style="height: {{ tab.height ? tab.height + 'px' : 'auto' }}"
+      >
+        <view
+          wx:for="{{ tab.list }}"
+          wx:key="id"
+          class="zan-tab__item {{ tab.selectedId == item.id ? 'zan-tab__item--selected' : '' }}"
+          @tap="_handleTabChange({{item.id}})"
+        >
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <view class="zan-tab__bd {{ fixed ? 'zan-tab__bd--fixed' : '' }}">
+
+        <view
+          wx:for="{{ tab.list }}"
+          wx:key="id"
+          class="zan-tab__item {{ tab.selectedId == item.id ? 'zan-tab__item--selected' : '' }}"
+          @tap="_handleTabChange({{item.id}})"
+        >
+          <view class="zan-tab__title">{{ item.title }}</view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Tab extends wepy.component {
+  props = {
+    tab: Object,
+    componentId: String
+  }
+
+  methods = {
+    _handleTabChange(itemId) {
+      console.info('[zan:tab:change]', itemId);
+      this.$emit('tabChange', {
+        selectedId: itemId,
+        componentId: this.componentId
+      })
+    }
+  }
+}
+</script>
+

@@ -1,0 +1,59 @@
+@zan-tab: zan-tab;
+
+.zan-tab {
+  height: 45px;
+
+  &__bd {
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1rpx solid #e5e5e5;
+    background: #fff;
+
+    &--fixed {
+      position: fixed;
+      top: 0;
+      z-index: 2;
+    }
+
+    &--scroll {
+      display: block;
+      white-space: nowrap;
+
+      .@{zan-tab}__item {
+        min-width: 80px;
+      }
+    }
+  }
+
+  &__item {
+    flex: 1;
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+
+    &--selected {
+      .@{zan-tab}__title {
+        color: #f44;
+        border-bottom: 2px solid #f44;
+      }
+    }
+  }
+
+  &__title {
+    display: inline-block;
+    max-width: 100%;
+    height: 44px;
+    line-height: 44px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    word-break: keep-all;
+    font-size: 14px;
+    color: #666;
+  }
+}
+
